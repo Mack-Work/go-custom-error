@@ -1,12 +1,11 @@
 # go-custom-error
 create error with you struct and business logic error code
 
-Paragraph 1
 ## สร้าง Error Code และ Custom Error Struct
 ใน error/error.go มีการประกาศ const ของ ErrorCode เพื่อเป็นการกำหนด error code ของ error ต่างๆที่เราต้องการ
 
-
-`// ประกาศ type ErrorCode เป็นตัวแปรที่จะใช้เก็บค่าของ ErrorCode
+```go
+// ประกาศ type ErrorCode เป็นตัวแปรที่จะใช้เก็บค่าของ ErrorCode
 type ErrorCode int
 
 // การกำหนดความหมายของ ErrorCode ต่างๆ ตามที่เราต้องการและยังเป็นการกำหนดให้ใช้ไปในทางเดียวกัน
@@ -19,12 +18,13 @@ const (
 	ErrForbidden
 	ErrBadRequest
 	ErrConflict
-)`
+)
+```
 
 
 สร้าง custom error ด้วย การประการ struct CustomError และเรียกใช้ ErrorCode ที่เราสร้างไว้ก่อนหน้า เมื่อต้องการสร้าง error ให้เรียกใช้ผ่าน Func NewCustomError
 
-`
+```go
 // ประกาศ type CustomError เป็นตัวแปรที่จะใช้เก็บค่าของ CustomError
 type CustomError struct {
 	Message string
@@ -40,26 +40,27 @@ func (e *CustomError) Error() string {
 func NewCustomError(message string, code ErrorCode) *CustomError {
 	return &CustomError{Message: message, Code: code}
 }
+```
 
-Paragraph 2
+
 ## ใช้งาน Custom Error Struct
 สร้าง func สำหรับ return error ใน main.go ซึ่ง func return type เป็น error แต่เราสามารถใช้ CustomError implements interface error ได้
 
-`
+```go
 // function สำหรับสร้าง error ต่างๆ ตามค่า ErrorCode ที่ระบุ
 func ReturnErrorNotFound() error {
 	return customerror.NewCustomError("Not Found", customerror.ErrNotFound)
 }
-`
+```
 
 ใน func main() ทำการ print ค่า error message ที่ได้จาก func ReturnErrorNotFound() ตามคำที่ business ต้องการด้วย ErrorCode
 
-`
+```go
 fmt.Println("Not Found: ", customerror.ReturnMessageFromErrorCode(err))
-`
+```
 func ReturnMessageFromErrorCode(err) จาก error/print_error.go
 
-`
+```go
 // สร้าง function PrintError() เพื่อพิมพ์ข้อความของ error ตามค่า ErrorCode ที่ระบุ
 func ReturnMessageFromErrorCode(err error) string {
 	if err == nil {
@@ -93,4 +94,4 @@ func ReturnMessageFromErrorCode(err error) string {
 		return err.Error()
 	}
 }
-`
+```
