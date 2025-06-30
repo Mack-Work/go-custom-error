@@ -5,8 +5,8 @@ Paragraph 1
 ## สร้าง Error Code และ Custom Error Struct
 ใน error/error.go มีการประกาศ const ของ ErrorCode เพื่อเป็นการกำหนด error code ของ error ต่างๆที่เราต้องการ
 
-`
-// ประกาศ type ErrorCode เป็นตัวแปรที่จะใช้เก็บค่าของ ErrorCode
+
+`// ประกาศ type ErrorCode เป็นตัวแปรที่จะใช้เก็บค่าของ ErrorCode
 type ErrorCode int
 
 // การกำหนดความหมายของ ErrorCode ต่างๆ ตามที่เราต้องการและยังเป็นการกำหนดให้ใช้ไปในทางเดียวกัน
@@ -19,8 +19,8 @@ const (
 	ErrForbidden
 	ErrBadRequest
 	ErrConflict
-)
-`
+)`
+
 
 สร้าง custom error ด้วย การประการ struct CustomError และเรียกใช้ ErrorCode ที่เราสร้างไว้ก่อนหน้า เมื่อต้องการสร้าง error ให้เรียกใช้ผ่าน Func NewCustomError
 
