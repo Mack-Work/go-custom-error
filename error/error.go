@@ -26,7 +26,7 @@ func (e *CustomError) Error() string {
 	return e.Message
 }
 
-// สร้าง function NewCustomError() เพื่อสร้างตัวแปร CustomError ใหม่
+// เรียกใช้ function NewCustomError() เพื่อสร้างตัวแปร CustomError ใหม่
 func NewCustomError(message string, code ErrorCode) *CustomError {
 	return &CustomError{Message: message, Code: code}
 }
